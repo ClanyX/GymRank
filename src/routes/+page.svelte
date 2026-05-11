@@ -62,8 +62,8 @@
 		</span>
 	</h1>
 
-    <Button outline pill color="dark" onclick={() => window.location.href = '/login'} class="mt-8 text-lg md:text-xl">
-        Začni teď
+    <Button outline pill color="dark" onclick={() => window.location.href = '/register'} class="mt-8 text-lg md:text-xl">
+        Registrace
     </Button>
 
 	<p class="mt-8 text-xl md:text-2xl font-light text-gray-600 dark:text-gray-400 font-serif italic tracking-wide">

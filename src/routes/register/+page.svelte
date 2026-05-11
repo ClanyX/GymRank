@@ -65,7 +65,7 @@
 			<div class="flex items-center gap-2 py-2 ml-2">
         		<Checkbox id="terms" name="terms" required bind:checked={agreed} class="accent-primary-600" />
 				<Label for="terms" class="text-xs text-gray-400 font-medium">
-            		Souhlasím se <A href="/terms" target="_blank" class="text-primary-500 hover:underline weight-bold">smluvními podmínkami</A> a pravidly Fair-Play
+            		Souhlasím se <A href="/terms" target="_blank" class="text-primary-500 hover:underline weight-bold underline">smluvními podmínkami</A> a pravidly Fair-Play
         		</Label>
     		</div>
 

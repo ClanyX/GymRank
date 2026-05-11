@@ -51,14 +51,14 @@
 <div class="flex flex-col min-h-screen bg-white text-gray-900 dark:bg-gray-900 dark:text-white transition-colors duration-200">
 	<div class="relative">
 		<Navbar class="fixed inset-x-0 top-0 z-50 w-full border-b border-gray-300 bg-gray-200/95 px-2 py-2.5 backdrop-blur-sm sm:px-4 dark:border-gray-700 dark:bg-gray-800/95">
-			<NavBrand href="/">
-				<img src="/logo.svg" class="me-3 h-9 sm:h-12" alt="gym-logo" />
+			<NavBrand href="/"> <!-- h-6 only with alpha/beta text otherwise h-9 (img) -->
+				<img src="/logo.svg" class="me-3 h-6 sm:h-12" alt="gym-logo" />
 				<span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">GymRank</span>
 				<span class="ml-2 mt-3 text-xs font-semibold whitespace-nowrap text-gray-500">ALPHA</span>
 			</NavBrand>
   			<div class="flex md:order-2 gap-1">
-				{#if !session}
-	    			<GradientButton href="/login" pill shadow color="purpleToBlue" size="sm">PŘIHLÁSIT</GradientButton >
+				{#if !session} <!-- TODO: size="xs" only with alpha/beta text otherwise size="sm" -->
+	    			<GradientButton href="/login" pill shadow color="purpleToBlue" size="xs">PŘIHLÁSIT</GradientButton >
 				{:else}
 					<div class="flex items-center md:order-2">
     					<Avatar class="cursor-pointer h-9 w-9 md:h-12 md:w-12" id="avatar-menu" src="/profil-img.png" />
