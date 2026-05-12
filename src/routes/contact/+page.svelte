@@ -9,7 +9,7 @@
 			Potřebuješ <span class="text-primary-600">Help?</span>
 		</h1>
 		<p class="text-gray-400 text-lg font-medium">
-			Jsme tu pro tebe, ať už jde o bug v aplikaci nebo dotaz ke tvému ranku.
+			Jsem tu pro tebe, ať už jde o bug v aplikaci nebo dotaz ke tvému ranku.
 		</p>
 	</header>
 
@@ -21,11 +21,11 @@
 				</div>
 				<div>
 					<h3 class="text-white font-bold uppercase text-sm tracking-wider">Email Support</h3>
-					<p class="text-gray-500 text-xs">Odpovídáme do 24h</p>
+					<p class="text-gray-500 text-xs">Odpovídám do 24h</p>
 				</div>
 			</div>
-			<a href="mailto:sandera.filip6@gmail.com" class="text-primary-500 font-bold hover:underline"
-				>sandera.filip6@gmail.com</a
+			<a href="mailto:info@gymrank.cz" class="text-primary-500 font-bold hover:underline"
+				>info@gymrank.cz</a
 			>
 		</Card>
 
@@ -36,11 +36,11 @@
 				</div>
 				<div>
 					<h3 class="text-white font-bold uppercase text-sm tracking-wider">Nahlásit chybu</h3>
-					<p class="text-gray-500 text-xs">Pomoz nám se zlepšovat</p>
+					<p class="text-gray-500 text-xs">Pomoz mi se zlepšovat</p>
 				</div>
 			</div>
 			<p class="text-gray-400 text-xs italic">
-				Našel jsi bug v tabulkách nebo grafech? Pošli nám screenshot!
+				Našel jsi bug v tabulkách nebo grafech? Pošli mi screenshot!
 			</p>
 		</Card>
 	</div>

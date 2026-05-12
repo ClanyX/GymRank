@@ -19,7 +19,7 @@
         <Card class="dark:bg-gray-800 dark:border-gray-700 text-center space-y-4 p-8">
             <AwardOutline class="w-12 h-12 text-primary-500 mx-auto" />
             <h3 class="text-xl font-bold dark:text-white uppercase italic tracking-tight">Soutěživost</h3>
-            <p class="text-gray-500 text-sm">Chceme vybudovat zdravou rivalitu mezi sportovci v každém gymu.</p>
+            <p class="text-gray-500 text-sm">Chci vybudovat zdravou rivalitu mezi sportovci v každém gymu.</p>
         </Card>
 
         <Card class="dark:bg-gray-800 dark:border-gray-700 text-center space-y-4 p-8">
@@ -53,6 +53,9 @@
                 </TimelineItem>
                 <TimelineItem title="Spuštění mobilní aplikace" date="6. Května 2026">
                     <p class="text-gray-500 text-sm mt-2">Přidání možnosti stažení aplikace na iOS a Android. Režim ofline a online.</p>
+                </TimelineItem>
+                <TimelineItem title="Spuštění mobilní aplikace" date="13. Května 2026">
+                    <p class="text-gray-500 text-sm mt-2">Spuštění vlastní domény. "gymrank.cz"</p>
                 </TimelineItem>
                 <!-- TODO: Add timeline item -->
             </Timeline>

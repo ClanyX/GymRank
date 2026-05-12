@@ -130,7 +130,7 @@
     		  <FooterIcon href="https://github.com/ClanyX/Gym_Ranking.git" target="_blank" class="text-gray-500 hover:text-primary-600">
     		    <GithubSolid class="w-5 h-5" />
     		  </FooterIcon>
-    		  <FooterIcon href="mailto:sandera.filip6@gmail.com" class="text-gray-500 hover:text-primary-600">
+    		  <FooterIcon href="mailto:info@gymrank.cz" class="text-gray-500 hover:text-primary-600">
     		    <EnvelopeSolid class="w-5 h-5" />
     		  </FooterIcon>
     		</div>
@@ -139,7 +139,7 @@
   		<hr class="my-6 border-gray-200 dark:border-gray-800 sm:mx-auto" />
 
   		<div class="text-center">
-  		  <FooterCopyright href="/" by="Filip Šandera" year={2026} class="font-serif italic text-sm" />
+  		  <FooterCopyright href="/credits" by="Filip Šandera" year={2026} class="font-serif italic text-sm" />
   		  <p class="text-[10px] text-gray-400 uppercase tracking-widest mt-2">
   		    Built with SvelteKit & Supabase
   		  </p>
