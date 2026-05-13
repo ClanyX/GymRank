@@ -1,47 +1,100 @@
-<script lang="ts">
-	import { Card } from 'flowbite-svelte';
-	import { EnvelopeSolid, BugOutline } from 'flowbite-svelte-icons';
-</script>
-
-<div class="max-w-5xl mx-auto p-6 space-y-12">
-	<header class="text-center space-y-4 py-10">
-		<h1 class="text-5xl md:text-6xl font-black italic uppercase tracking-tighter dark:text-white">
-			Potřebuješ <span class="text-primary-600">Help?</span>
-		</h1>
-		<p class="text-gray-400 text-lg font-medium">
-			Jsem tu pro tebe, ať už jde o bug v aplikaci nebo dotaz ke tvému ranku.
-		</p>
-	</header>
-
-	<div class="space-y-6 md:space-y-0 flex flex-col md:flex-row gap-6 justify-center items-stretch">
-		<Card class="dark:bg-gray-800 border-gray-800 p-6 text-center flex flex-col items-center">
-			<div class="flex flex-col items-center gap-3 mb-4 text-center">
-				<div class="p-3 bg-primary-900/30 rounded-xl">
-					<EnvelopeSolid class="w-6 h-6 text-primary-500" />
-				</div>
-				<div>
-					<h3 class="text-white font-bold uppercase text-sm tracking-wider">Email Support</h3>
-					<p class="text-gray-500 text-xs">Odpovídám do 24h</p>
-				</div>
-			</div>
-			<a href="mailto:info@gymrank.cz" class="text-primary-500 font-bold hover:underline"
-				>info@gymrank.cz</a
-			>
-		</Card>
-
-		<Card class="dark:bg-gray-800 border-gray-800 p-6 text-center flex flex-col items-center">
-			<div class="flex flex-col items-center gap-3 mb-4 text-center">
-				<div class="p-3 bg-gray-800 rounded-xl">
-					<BugOutline class="w-6 h-6 text-red-500" />
-				</div>
-				<div>
-					<h3 class="text-white font-bold uppercase text-sm tracking-wider">Nahlásit chybu</h3>
-					<p class="text-gray-500 text-xs">Pomoz mi se zlepšovat</p>
-				</div>
-			</div>
-			<p class="text-gray-400 text-xs italic">
-				Našel jsi bug v tabulkách nebo grafech? Pošli mi screenshot!
-			</p>
-		</Card>
+<section class="max-w-4xl mx-auto px-4 py-12">
+	<div class="text-center mb-12">
+		<h1 class="text-4xl font-extrabold text-gray-900 mb-4 dark:text-white">Centrum podpory GymRank</h1>
+		<p class="text-lg text-gray-400">Vše, co potřebuješ vědět o tréninku, žebříčcích a aplikaci.</p>
 	</div>
-</div>
+
+	<!-- Kategorie karet -->
+	<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+		<div class="p-6 border rounded-xl hover:shadow-lg transition-shadow bg-white dark:bg-gray-600 cursor-pointer">
+			<a href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Guides/Installing" target="_blank">
+				<div class="text-3xl mb-3">📱</div>
+				<h3 class="font-bold text-xl mb-2">Instalace PWA</h3>
+				<p class="text-sm text-gray-400">Návod, jak mít GymRank stále po ruce na ploše mobilu.</p>
+			</a>
+		</div>
+
+		<div class="p-6 border rounded-xl hover:shadow-lg transition-shadow bg-white dark:bg-gray-600 cursor-pointer">
+			<div class="text-3xl mb-3">⚙️</div>
+			<h3 class="font-bold text-xl mb-2">Správa účtu</h3>
+			<p class="text-sm text-gray-400">Změna hesla, nastavení profilu a ochrana údajů.</p>
+		</div>
+
+		<div class="p-6 border rounded-xl hover:shadow-lg transition-shadow bg-white dark:bg-gray-600 cursor-pointer">
+			<div class="text-3xl mb-3">🔥</div>
+			<h3 class="font-bold text-xl mb-2">Metodika Ranku</h3>
+			<p class="text-sm text-gray-400">Zjisti, jak počítáme tvé skóre v porovnání s ostatními.</p>
+		</div>
+	</div>
+
+	<!-- Sekce Nahlášení bugu -->
+	<div class="my-16 p-8 border-2 border-dashed border-red-200 dark:border-red-400 rounded-2xl bg-red-50 dark:bg-red-200">
+		<div class="flex flex-col md:flex-row items-center gap-6">
+			<div class="text-5xl">🐛</div>
+			<div class="flex-1">
+				<h2 class="text-2xl font-bold text-red-800 mb-2">Našel jsi chybu? Pomoz mi ji opravit!</h2>
+				<p class="text-red-700 opacity-90">
+					GymRank neustále vylepšuji, ale občas se nějaký šotek vloudí. Pokud něco nefunguje, jak
+					má, dej mi vědět.
+				</p>
+
+				<div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+					<ul class="text-sm text-red-900 space-y-1">
+						<li class="flex items-center">✅ Popiš, co se stalo</li>
+						<li class="flex items-center">✅ Jaké máš zařízení (iPhone/Android)</li>
+					</ul>
+					<ul class="text-sm text-red-900 space-y-1">
+						<li class="flex items-center">✅ Ideálně přilož screenshot</li>
+						<li class="flex items-center">✅ Kde přesně jsi v aplikaci byl</li>
+					</ul>
+				</div>
+			</div>
+			<div class="mt-4 md:mt-0">
+				<a
+					href="mailto:info@gymrank?subject=Nahlášení chyby - GymRank"
+					class="bg-red-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-red-700 transition-colors inline-block whitespace-nowrap"
+				>
+					Nahlásit bug
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- FAQ Sekce (Akordeon) -->
+	<div class="space-y-4">
+		<h2 class="text-2xl font-bold mb-6 text-center">Často kladené dotazy</h2>
+
+		<details class="group border rounded-lg bg-gray-50 dark:bg-gray-600 p-4">
+			<summary class="font-semibold cursor-pointer list-none flex justify-between items-center">
+				<span>Jak si přidám záznam cviku?</span>
+				<span class="transition group-open:rotate-180">▼</span>
+			</summary>
+			<p class="mt-3 text-gray-400">
+				V sekci "Dashboard" klikni na tlačítko "+ Nový záznam" a vyber si z naší databáze...
+			</p>
+		</details>
+
+		<details class="group border rounded-lg bg-gray-50 dark:bg-gray-600 p-4">
+			<summary class="font-semibold cursor-pointer list-none flex justify-between items-center">
+				<span>Co dělat, když mi nepřišel potvrzovací e-mail?</span>
+				<span class="transition group-open:rotate-180">▼</span>
+			</summary>
+			<p class="mt-3 text-gray-400">
+				Zkontroluj složku SPAM nebo hromadné zprávy. Pokud tam není, zkus si nechat poslat nový
+				odkaz.
+			</p>
+		</details>
+	</div>
+
+	<!-- Kontaktní CTA -->
+	<div class="mt-20 bg-blue-600 rounded-2xl p-8 text-center text-white">
+		<h2 class="text-2xl font-bold mb-2">Nenašel jsi odpověď?</h2>
+		<p class="mb-6 opacity-90">Napiš mi přímo na e-mail a já se ti ozvu.</p>
+		<a
+			href="mailto:info@gymrank.cz"
+			class="bg-white text-blue-600 px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition-colors"
+		>
+			Napsat na podporu
+		</a>
+	</div>
+</section>
