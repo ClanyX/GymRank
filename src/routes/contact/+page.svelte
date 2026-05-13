@@ -51,7 +51,7 @@
 			</div>
 			<div class="mt-4 md:mt-0">
 				<a
-					href="mailto:info@gymrank?subject=Nahlášení chyby - GymRank"
+					href="mailto:info@gymrank.cz?subject=Nahlášení chyby - GymRank" target="_top"
 					class="bg-red-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-red-700 transition-colors inline-block whitespace-nowrap"
 				>
 					Nahlásit bug
