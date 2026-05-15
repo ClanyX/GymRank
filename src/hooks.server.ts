@@ -1,5 +1,5 @@
 // Import Supabase authentication helpers for SvelteKit server-side usage
-import { createServerClient } from '@supabase/auth-helpers-sveltekit';
+import { createServerClient } from '@supabase/ssr';
 // Import SvelteKit server hooks and redirect utility
 import { type Handle, redirect } from '@sveltejs/kit';
 // Import sequence utility to chain multiple middleware hooks together
@@ -64,7 +64,7 @@ const supabase: Handle = async ({ event, resolve }) => {
     // Filter response headers - only allow these specific headers to be serialized
     // This improves security by controlling what data gets sent to the client
     filterSerializedResponseHeaders(name) {
-      return name === 'content-range' || name === 'x-supabase-parse-le';
+      return name === 'content-range' || name === 'x-supabase-api-version';
     },
   });
 };

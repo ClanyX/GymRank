@@ -10,7 +10,7 @@
     let maxAge = $state(60);
 
     //sort
-    let sortBy = $state('weight');
+    let sortBy = $state('date');
 
     $effect(() => {
         if (minAge > maxAge) {
@@ -39,6 +39,8 @@
                     const aRelative = a.recordInfo.liftedWeight / ((a.userInfo?.weight ?? 1) / 1000);
                     const bRelative = b.recordInfo.liftedWeight / ((b.userInfo?.weight ?? 1) / 1000);
                     return bRelative - aRelative;
+                } else if(sortBy === 'date'){
+                    return new Date(b.recordInfo?.addedAt as string | number | Date).getTime() - new Date(a.recordInfo?.addedAt as string | number | Date).getTime();
                 }
                 return 0;
             })
@@ -133,6 +135,7 @@
                 bind:value={sortBy}
                 class="dark:bg-gray-800 bg-gray-100 dark:border-gray-800 border-gray-300 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 outline-none"
             >
+                <option value="date">Nejnovější datum</option>
                 <option value="weight">Nejtěžší váha</option>
                 <option value="relative">Nejlepší relativní výkon</option>
             </select>
