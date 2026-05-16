@@ -37,7 +37,7 @@ export const actions: Actions = {
 			return fail(400, { message: 'Všechna pole jsou povinná.' });
 		}
 
-		if(password.length < 7) {
+		if(password.length < 8) {
 			return fail(400, { message: 'Heslo musí být alespoň 8 znaků dlouhé.' });
 		}
 
