@@ -13,7 +13,7 @@ export const actions: Actions = {
 		const formData = await request.formData();
 		const password = formData.get('password') as string;
 
-		if (!password || password.length < 8) {
+		if (!password || password.length < 7) {
 			return fail(400, { error: 'Heslo musí mít aspoň 8 znaků' });
 		}
 
