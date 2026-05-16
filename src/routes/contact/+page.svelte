@@ -73,6 +73,19 @@
 				V sekci "Dashboard" klikni na tlačítko "+ Nový záznam" a vyber si z naší databáze...
 			</p>
 		</details>
+		
+		<details class="group border rounded-lg bg-gray-50 dark:bg-gray-600 p-4">
+		    <summary class="font-semibold cursor-pointer list-none flex justify-between items-center">
+		        <span>Jak si mohu změnit nebo obnovit heslo?</span>
+		        <span class="transition group-open:rotate-180">▼</span>
+		    </summary>
+		    <p class="mt-3 text-gray-400">
+		        Pokud jsi heslo <strong>zapomněl/a</strong>, klikni na přihlašovací stránce na odkaz „Zapomněl jsi heslo?“. Systém ti pošle e-mail s odkazem pro bezpečné nastavení nového hesla. 
+		    </p>
+		    <p class="mt-2 text-gray-400">
+		        Pokud jsi <strong>přihlášen/a</strong> a chceš heslo jen změnit, přejdi do nastavení svého profilu, kde najdeš formulář pro zadání nového hesla. Po každé změně ti pro jistotu pošleme potvrzovací e-mail.
+		    </p>
+		</details>
 
 		<details class="group border rounded-lg bg-gray-50 dark:bg-gray-600 p-4">
 			<summary class="font-semibold cursor-pointer list-none flex justify-between items-center">

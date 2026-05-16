@@ -3,6 +3,7 @@
     import { UserCircleSolid } from 'flowbite-svelte-icons';
     import { enhance } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';
+    import { resolve } from '$app/paths';
 
     let { data, form } = $props();
 
@@ -78,6 +79,13 @@
             <div class="grid grid-cols-1 gap-4">
                 <Label class="text-gray-400 font-bold uppercase text-[10px]">Datum narození</Label>
                 <Input name="dateOfBirth" type="date" value={user.age.toString().split('T')[0]} class="dark:bg-gray-800 dark:border-gray-700 dark:text-white" />
+            </div>
+
+            <div class="grid grid-cols-1 gap-4">
+                <Label class="text-gray-400 font-bold uppercase text-[10px]">Změnit heslo</Label>
+                <a href={resolve('/auth/update-password')} class="text-primary-600 text-[15px] font-bold hover:underline">
+                    Klikni zde pro nastavení nového hesla
+                </a>
             </div>
 
             <div class="pt-4 border-t border-gray-800 flex items-center justify-center space-x-2">
