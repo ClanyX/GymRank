@@ -23,13 +23,17 @@
 				<Input type="password" name="password" id="password" placeholder="••••••••" required />
 			</div>
 
+			<div>
+				<a href={resolve('/auth/reset-password')} class="text-xs font-bold text-primary-500 hover:underline italic">
+            	    Zapomněl jsi heslo?
+            	</a>
+			</div>
+
 			{#if form?.message}
 				<p class="text-sm font-medium text-red-500 dark:text-red-400">
 					{form.message}
 				</p>
 			{/if}
-
-			<!-- TODO: implement forgot password and remember me -->
 
 			<GradientButton pill outline color="pinkToOrange" type="submit" class="w-full bg-primary-600 hover:bg-primary-700">Přihlásit se</GradientButton>
 

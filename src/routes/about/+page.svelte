@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Card, Timeline, TimelineItem, Button } from 'flowbite-svelte';
-    import { RocketOutline, AwardOutline, UsersGroupOutline, CodeOutline } from 'flowbite-svelte-icons';
+    import { RocketOutline, AwardOutline, UsersGroupOutline, CodeOutline, ArrowUpRightFromSquareOutline } from 'flowbite-svelte-icons';
 </script>
 
 <div class="max-w-4xl mx-auto p-6 space-y-16">
@@ -57,7 +57,14 @@
                 <TimelineItem title="Spuštění mobilní aplikace" date="13. Května 2026">
                     <p class="text-gray-500 text-sm mt-2">Spuštění vlastní domény. "gymrank.cz"</p>
                 </TimelineItem>
-                <!-- TODO: Add timeline item -->
+                <TimelineItem title="První video o GymRank" date="14. Května 2026">
+                    <a href='https://youtu.be/DUZoQCIAzzA' target="_blank">
+                        <p class="text-gray-500 text-sm mt-2 hover:underline">
+                            Sleduj na YouTube
+                            <ArrowUpRightFromSquareOutline class="inline w-4 h-4 ml-1" />
+                        </p>
+                    </a>
+                </TimelineItem>
             </Timeline>
         </div>
     </section>

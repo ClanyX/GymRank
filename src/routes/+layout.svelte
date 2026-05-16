@@ -3,6 +3,7 @@
 	import { invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import { supabase } from '$lib/supabase.js';
+	import type { Session } from '@supabase/supabase-js';
 	import { DarkMode, Navbar, NavBrand, NavHamburger, NavUl, NavLi, GradientButton, Dropdown, DropdownHeader, Avatar, DropdownGroup, DropdownItem } from 'flowbite-svelte';
 	import { page } from '$app/state';
 	import { scale } from 'svelte/transition';
@@ -26,7 +27,7 @@
 	onMount(() => {
 		const {
 			data: { subscription }
-		} = supabase.auth.onAuthStateChange((event, _session) => {
+		} = supabase.auth.onAuthStateChange((_event: string, _session: Session | null) => {
 			if (_session?.expires_at !== session?.expires_at) {
 				invalidate('supabase:auth');
 			}

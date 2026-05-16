@@ -9,6 +9,9 @@
     let minAge = $state(10);
     let maxAge = $state(60);
 
+    //sort
+    let sortBy = $state('date');
+
     $effect(() => {
         if (minAge > maxAge) {
             const temp = minAge;
@@ -18,16 +21,29 @@
     });
 
     let filteredRecords = $derived(
-        data.allRecords.filter(item => {
-            const fullName = `${item.userInfo?.firstName} ${item.userInfo?.lastName}`.toLowerCase();
-            const age = calculateAge(item.userInfo?.age ?? '');
+        data.allRecords
+            .filter(item => {
+                const fullName = `${item.userInfo?.firstName} ${item.userInfo?.lastName}`.toLowerCase();
+                const age = calculateAge(item.userInfo?.age ?? '');
 
-            const matchesSearch = fullName.includes(searchTerm.toLowerCase());
-            const matchesExercise = selectedExercise === '' || item.exercisesInfo?.exerciseName === selectedExercise;
-            const matchesGender = selectedGender === '' || item.userInfo?.gender === selectedGender;
-            const matchesAge = age >= minAge && age <= maxAge;
-            return matchesSearch && matchesExercise && matchesGender && matchesAge;
-        })
+                const matchesSearch = fullName.includes(searchTerm.toLowerCase());
+                const matchesExercise = selectedExercise === '' || item.exercisesInfo?.exerciseName === selectedExercise;
+                const matchesGender = selectedGender === '' || item.userInfo?.gender === selectedGender;
+                const matchesAge = age >= minAge && age <= maxAge;
+                return matchesSearch && matchesExercise && matchesGender && matchesAge;
+            })
+            .sort((a, b) => {
+                if(sortBy === 'weight'){
+                    return b.recordInfo.liftedWeight - a.recordInfo.liftedWeight;
+                } else if(sortBy === 'relative'){
+                    const aRelative = a.recordInfo.liftedWeight / ((a.userInfo?.weight ?? 1) / 1000);
+                    const bRelative = b.recordInfo.liftedWeight / ((b.userInfo?.weight ?? 1) / 1000);
+                    return bRelative - aRelative;
+                } else if(sortBy === 'date'){
+                    return new Date(b.recordInfo?.addedAt as string | number | Date).getTime() - new Date(a.recordInfo?.addedAt as string | number | Date).getTime();
+                }
+                return 0;
+            })
     );
 
     function calculateAge(birthDate: string | Date) {
@@ -112,6 +128,18 @@
                 </div>
             </div>
         </div>
+        <!-- Sort method -->
+        <div>
+            <Label class="mb-2 text-gray-400 uppercase text-xs font-bold italic tracking-wider">Řadit podle</Label>
+            <select 
+                bind:value={sortBy}
+                class="dark:bg-gray-800 bg-gray-100 dark:border-gray-800 border-gray-300 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 outline-none"
+            >
+                <option value="date">Nejnovější datum</option>
+                <option value="weight">Nejtěžší váha</option>
+                <option value="relative">Nejlepší relativní výkon</option>
+            </select>
+        </div>
     </div>
 
     <div class="rounded-2xl overflow-hidden border dark:border-gray-800 border-gray-300 shadow-2xl">
@@ -144,6 +172,11 @@
 
                         <TableBodyCell class="text-right font-black italic text-2xl tracking-tighter dark:text-white text-gray-600">
                             {item.recordInfo.liftedWeight / 1000} <span class="text-[12px] tracking-normal text-gray-500 ml-0.5">kg</span>
+                            {#if sortBy === 'relative'}
+                                <div class="text-[10px] text-primary-500 font-normal tracking-tight mt-2">
+                                    {(item.recordInfo.liftedWeight / (item.userInfo?.weight || 1)).toFixed(2)}x tělesné váhy
+                                </div>
+                            {/if}
                         </TableBodyCell>
 
                         <TableBodyCell class="text-right text-xs text-gray-500 font-medium px-8">
