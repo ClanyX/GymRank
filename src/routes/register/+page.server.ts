@@ -17,8 +17,14 @@ export const actions: Actions = {
 		const weight = parseFloat(formData.get('weight') as string);
 		const gender = formData.get('gender') as 'male' | 'female' | 'other';
 		const terms = formData.get('terms') as string;
+		const captchaToken = formData.get('captchaToken') as string;
 
 		const honeypot = formData.get('honeypot') as string;
+
+		if(!captchaToken) {
+			//fail(400, { error: 'Captcha je požadována!' });
+			return fail(400, { message: 'Captcha je požadována!' });
+		}
 
 		if (honeypot) {
 			return fail(400, { message: 'Bot detected!' });
@@ -65,6 +71,7 @@ export const actions: Actions = {
 			email,
 			password,
 			options: {
+				captchaToken,
 				data: {
 					firstName: cleanFirstName,
 				},

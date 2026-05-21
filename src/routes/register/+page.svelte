@@ -2,8 +2,41 @@
 	import { GradientButton, Label, Input, Card, Select, Checkbox, A } from 'flowbite-svelte';
 	import { enhance } from '$app/forms';
 	import { resolve } from '$app/paths';
+	import { PUBLIC_TURNSTILE_SITEKEY } from '$env/static/public';
+	import { onMount } from 'svelte';
 
 	let { form } = $props();
+
+	let turnstileToken = $state('');
+	let container: HTMLElement;
+
+	onMount(() => {
+		type TurnstileWidget = {
+			render: (
+				el: HTMLElement,
+				opts: { sitekey: string; theme?: string; callback?: (token: string) => void }
+			) => void;
+		};
+
+		const win = window as Window & { turnstile?: TurnstileWidget };
+
+		const isDarkMode = document.documentElement.classList.contains('dark');
+
+		const checkTrturnstile = setInterval(() => {
+			if (win.turnstile) {
+				clearInterval(checkTrturnstile);
+				win.turnstile.render(container, {
+					sitekey: PUBLIC_TURNSTILE_SITEKEY,
+					theme: isDarkMode ? 'dark' : 'light',
+					callback: (token: string) => {
+						turnstileToken = token;
+					},
+				});
+			}
+		}, 100);
+
+		return () => clearInterval(checkTrturnstile);
+	});
 
 	let genders = [
 		{ value: 'male', name: 'Muž' },
@@ -13,6 +46,10 @@
 
 	let agreed = $state(false);
 </script>
+
+<svelte:head>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback" async defer></script>
+</svelte:head>
 
 <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto mt-16 mb-16 lg:py-0">
 	<Card class="w-full sm:max-w-md">
@@ -74,11 +111,15 @@
     			<input type="text" name="honeypot" tabindex="-1" autocomplete="off" />
 			</div>
 
+			<!-- Turnstile -->
+			<input type="hidden" name="captchaToken" value={turnstileToken} />
+			<div bind:this={container} class="flex justify-center my-4"></div>
+
 			{#if form?.message}
 				<p class="text-sm font-medium text-red-500">{form.message}</p>
 			{/if}
 
-            <GradientButton disabled={!agreed} pill outline color="pinkToOrange" type="submit" class="w-full bg-primary-600 hover:bg-primary-700">Registrovat se</GradientButton>
+            <GradientButton disabled={!turnstileToken || !agreed} pill outline color="pinkToOrange" type="submit" class="w-full bg-primary-600 hover:bg-primary-700">Registrovat se</GradientButton>
 
             <p class="text-sm font-light text-gray-500 dark:text-gray-400">
 				Už máš účet? 
