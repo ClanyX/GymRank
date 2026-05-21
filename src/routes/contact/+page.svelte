@@ -35,7 +35,7 @@
 				<h2 class="text-2xl font-bold text-red-800 mb-2">Našel jsi chybu? Pomoz mi ji opravit!</h2>
 				<p class="text-red-700 opacity-90">
 					GymRank neustále vylepšuji, ale občas se nějaký šotek vloudí. Pokud něco nefunguje, jak
-					má, dej mi vědět.
+					má, dej mi vědět. Na e-mail: <span class="underline font-bold">info@gymrank.cz</span>
 				</p>
 
 				<div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">

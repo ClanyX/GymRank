@@ -67,7 +67,7 @@ export const actions: Actions = {
 			options: {
 				data: {
 					firstName: cleanFirstName,
-				}
+				},
 			},
 		});
 
