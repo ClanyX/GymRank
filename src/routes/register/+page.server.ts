@@ -1,8 +1,5 @@
 import { fail, redirect } from '@sveltejs/kit';
-import { db } from '$lib/server/index';
-import { userTable } from '$lib/server/database/schema';
 import type { Actions } from './$types';
-import { supabaseAdmin } from '$lib/server/supabaseAdmin';
 
 export const actions: Actions = {
 	default: async ({ request, locals: { supabase } }) => {
@@ -21,13 +18,13 @@ export const actions: Actions = {
 
 		const honeypot = formData.get('honeypot') as string;
 
+		if (honeypot) {
+			return fail(400, { message: 'Bot detected!' });
+		}
+		
 		if(!captchaToken) {
 			//fail(400, { error: 'Captcha je požadována!' });
 			return fail(400, { message: 'Captcha je požadována!' });
-		}
-
-		if (honeypot) {
-			return fail(400, { message: 'Bot detected!' });
 		}
 
 		if (terms !== 'on') {
@@ -43,7 +40,7 @@ export const actions: Actions = {
 			return fail(400, { message: 'Všechna pole jsou povinná.' });
 		}
 
-		if(password.length < 7) {
+		if(password.length < 8) {
 			return fail(400, { message: 'Heslo musí být alespoň 8 znaků dlouhé.' });
 		}
 
@@ -52,7 +49,11 @@ export const actions: Actions = {
         }
 
 		try {
-			const { data: existingUser, error: existingUserError } = await supabase.from('users').select('id').eq('email', email).single();
+			const { data: existingUser, error: existingUserError } = await supabase
+				.from('users')
+				.select('id')
+				.eq('email', email)
+				.maybeSingle();
 
 			if (existingUserError && existingUserError.code !== 'PGRST116') {
 				console.error('Chyba při kontrole existujícího uživatele:', existingUserError);
@@ -67,45 +68,58 @@ export const actions: Actions = {
 			return fail(500, { message: 'Chyba serveru při kontrole uživatele.' });
 		}
 
-		const { data: authData, error: authError } = await supabase.auth.signUp({
+		const { error: authError } = await supabase.auth.signUp({
 			email,
 			password,
 			options: {
 				captchaToken,
 				data: {
 					firstName: cleanFirstName,
+					lastName: cleanLastName,
+					dateOfBirth,
+					gender,
+					weight: correctWeight,
 				},
 			},
 		});
 
-		if (authError || !authData.user) {
+		if (authError) {
 			return fail(400, { message: 'Chyba při registraci: ' + authError?.message });
 		}
 
-        const userId = authData.user.id;
+		// // if (!authData || !authData.user) {
+		// // 	return fail(500, { message: 'Neznámá chyba při registraci.' });
+		// // }
 
-		try {
-			await db.insert(userTable).values({
-				id: userId,
-				firstName: cleanFirstName,
-				lastName: cleanLastName,
-				email,
-				dateOfBirth: new Date(dateOfBirth),
-				gender,
-				weight: correctWeight,
-                role: 'user',
-                isTrusted: false,
-                createdAt: new Date(),
-			});
-		} catch (dbError) {
-			console.error('Drizzle error, spouštím rollback:', dbError);
+        // const userId = authData?.user?.id;
 
-            const { error: deleteError } = await supabaseAdmin.auth.admin.deleteUser(userId);
-            if(deleteError) {
-                console.error('Chyba při mazání uživatele po selhání registrace:', deleteError);
-            }
-			return fail(500, { message: 'Profil se nepodařilo vytvořit.' });
-		}
+		// if(!userId || userId === '') {
+		// 	console.error('Supabase nevrátila validní UUID uživatele. Data:', authData);
+		// 	return fail(500, { message: 'Registrace selhala: Nepodařilo se získat ID uživatele ze Supabase.' });
+		// }
+
+		// try {
+		// 	await db.insert(userTable).values({
+		// 		id: userId,
+		// 		firstName: cleanFirstName,
+		// 		lastName: cleanLastName,
+		// 		email,
+		// 		dateOfBirth: new Date(dateOfBirth),
+		// 		gender,
+		// 		weight: correctWeight,
+        //         role: 'user',
+        //         isTrusted: false,
+        //         createdAt: new Date(),
+		// 	});
+		// } catch (dbError) {
+		// 	console.error('Drizzle error, spouštím rollback:', dbError);
+
+        //     const { error: deleteError } = await supabaseAdmin.auth.admin.deleteUser(userId ?? authData?.user?.id ?? '');
+        //     if(deleteError) {
+        //         console.error('Chyba při mazání uživatele po selhání registrace:', deleteError);
+        //     }
+		// 	return fail(500, { message: 'Profil se nepodařilo vytvořit.' });
+		// }
 
 		throw redirect(303, '/register/success');
 	}

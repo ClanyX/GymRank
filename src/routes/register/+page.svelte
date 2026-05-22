@@ -10,6 +10,15 @@
 	let turnstileToken = $state('');
 	let container: HTMLElement;
 
+	
+	let genders = [
+		{ value: 'male', name: 'Muž' },
+		{ value: 'female', name: 'Žena' },
+		{ value: 'other', name: 'Jiné' }
+	];
+	
+	let agreed = $state(false);
+
 	onMount(() => {
 		type TurnstileWidget = {
 			render: (
@@ -37,18 +46,10 @@
 
 		return () => clearInterval(checkTrturnstile);
 	});
-
-	let genders = [
-		{ value: 'male', name: 'Muž' },
-		{ value: 'female', name: 'Žena' },
-		{ value: 'other', name: 'Jiné' }
-	];
-
-	let agreed = $state(false);
 </script>
 
 <svelte:head>
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback" async defer></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </svelte:head>
 
 <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto mt-16 mb-16 lg:py-0">
