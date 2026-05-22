@@ -8,7 +8,6 @@ export const GET: RequestHandler = async ({ url, locals: { supabase } }) => {
 	const code = url.searchParams.get('code') || url.searchParams.get('token');
 	const type = url.searchParams.get('type');
 	const action = url.searchParams.get('action') || '';
-	const next = url.searchParams.get('next');
 
 	if (code) {
 		const { data: sessionData, error } = await supabase.auth.exchangeCodeForSession(code);
@@ -17,7 +16,7 @@ export const GET: RequestHandler = async ({ url, locals: { supabase } }) => {
 			const user = sessionData.user;
 			const meta = user.user_metadata;
 
-			if (type === 'recovery' || next?.includes('/auth/update-password')) {
+			if (type === 'recovery' || action === 'reset-password') {
 				throw redirect(303, '/auth/update-password');
 			}
 
@@ -49,13 +48,13 @@ export const GET: RequestHandler = async ({ url, locals: { supabase } }) => {
 
 				throw redirect(303, '/app/dashboard');
 			}
-			throw redirect(303, next || '/app/dashboard');
+			throw redirect(303, '/app/dashboard');
 		} else if (error) {
 			console.error('Chyba při exchangeCodeForSession:', error.message);
 		}
 	}
 
-	if (type === 'recovery' || url.pathname.includes('recovery')) {
+	if (type === 'recovery' || action === 'reset-password') {
 		throw redirect(303, '/auth/reset-password?error=Odkaz_vyprsel_nebo_je_neplatny');
 	}
 

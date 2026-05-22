@@ -15,7 +15,7 @@ export const actions: Actions = {
 			return fail(400, { error: 'E-mail je povinný' });
 		}
 
-		const redirectTo = `${url.origin}/auth/callback?next=/auth/update-password`;
+		const redirectTo = `${url.origin}/auth/callback?action=reset-password`;
 
 		const { error } = await supabase.auth.resetPasswordForEmail(email, {
 			redirectTo,
