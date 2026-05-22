@@ -9,7 +9,7 @@ export const load: PageServerLoad = async ({ locals: { safeGetSession } }) => {
 };
 
 export const actions: Actions = {
-	default: async ({ request, locals: { supabase } }) => {
+	default: async ({ url, request, locals: { supabase } }) => {
 		const formData = await request.formData();
 		const password = formData.get('password') as string;
 
@@ -17,9 +17,15 @@ export const actions: Actions = {
 			return fail(400, { error: 'Heslo musí mít aspoň 8 znaků' });
 		}
 
+		const code = url.searchParams.get('code');
+
+		if(code){
+			await supabase.auth.exchangeCodeForSession(code);
+		}
+
 		const { error } = await supabase.auth.updateUser({
 			password: password
-		});
+		});	
 
 		if (error) {
 			return fail(400, { error: error.message });

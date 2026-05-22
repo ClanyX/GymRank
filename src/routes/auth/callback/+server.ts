@@ -17,7 +17,7 @@ export const GET: RequestHandler = async ({ url, locals: { supabase } }) => {
 			const meta = user.user_metadata;
 
 			if (type === 'recovery' || action === 'reset-password') {
-				throw redirect(303, '/auth/update-password');
+				throw redirect(303, `/auth/update-password?code=${code}`);
 			}
 
 			if (meta && meta.firstName && action === 'register') {
