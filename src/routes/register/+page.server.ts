@@ -2,7 +2,7 @@ import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
 
 export const actions: Actions = {
-	default: async ({ request, locals: { supabase } }) => {
+	default: async ({ url, request, locals: { supabase } }) => {
 		const formData = await request.formData();
 		
 		const email = formData.get('email') as string;
@@ -73,6 +73,7 @@ export const actions: Actions = {
 			password,
 			options: {
 				captchaToken,
+				emailRedirectTo: `${url.origin}/auth/callback?action=register`,
 				data: {
 					firstName: cleanFirstName,
 					lastName: cleanLastName,

@@ -5,6 +5,11 @@ export const actions: Actions = {
 	default: async ({ request, locals: { supabase }, url }) => {
 		const formData = await request.formData();
 		const email = formData.get('email') as string;
+		const captchaToken = formData.get('captchaToken') as string;
+
+		if (!captchaToken) {
+			return fail(400, { error: 'Captcha je požadována!' });
+		}
 
 		if (!email) {
 			return fail(400, { error: 'E-mail je povinný' });
@@ -13,7 +18,8 @@ export const actions: Actions = {
 		const redirectTo = `${url.origin}/auth/callback?next=/auth/update-password`;
 
 		const { error } = await supabase.auth.resetPasswordForEmail(email, {
-			redirectTo
+			redirectTo,
+			captchaToken
 		});
 
 		if (error) {
