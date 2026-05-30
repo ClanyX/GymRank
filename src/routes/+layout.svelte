@@ -74,6 +74,7 @@
       						<DropdownItem href="/app/dashboard">Dashboard</DropdownItem>
       						<DropdownItem href="/app/exercises/hall-of-fame">Síň slávy</DropdownItem>
       						<DropdownItem href="/app/exercises/allexercises">Žebříček</DropdownItem>
+      						<DropdownItem href="/app/exercises/wilksscore">Wilks Score</DropdownItem>
     					</DropdownGroup>
 						<DropdownGroup>
 							<form method="POST" action="/?/logout" use:enhance>
@@ -99,6 +100,7 @@
 						<NavLi href="/app/profile">PROFIL</NavLi>
 						<NavLi href="/app/exercises/hall-of-fame">SÍŇ SLÁVY</NavLi>
 						<NavLi href="/app/exercises/allexercises">ŽEBŘÍČEK</NavLi>
+						<NavLi href="/app/exercises/wilksscore">WILKS SCORE</NavLi>
 					 {/if}
 				</NavUl>
 		</Navbar>

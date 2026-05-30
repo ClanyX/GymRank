@@ -1,11 +1,23 @@
 <script lang="ts">
   import { Card, Button, Heading, P, Badge } from 'flowbite-svelte';
   import { PlusOutline, ChartLineUpOutline, AwardOutline, ClockSolid } from 'flowbite-svelte-icons';
+  import { calculateWilksScore } from '$lib/utils/WilksScore.js';
 
   let { data } = $props();
 
   let exercisesMax = $derived(data.exercisesMax ?? []);
   let totalLifted = $derived(exercisesMax.reduce((total, pr) => total + (pr.maxWeight ?? 0), 0) / 1000);
+
+  let totalWilksLift = $derived.by(() => {
+    let total = 0;
+    exercisesMax.forEach(item => {
+      if(item.exerciseName === 'Squat' || item.exerciseName === 'Bench Press' || item.exerciseName === 'Deadlift') {
+        total += ((item.maxWeight ?? 0) / 1000);
+      }
+    });
+    return total;
+  });
+
 </script>
 
 <div class="p-4 sm:p-6 space-y-6 max-w-7xl mx-auto">
@@ -28,8 +40,8 @@
     <!-- TODO: add rank -->
     <Card class="bg-linear-to-br dark:from-gray-950 dark:to-gray-800 from-gray-100 to-gray-200 border-gray-200 shadow-xl relative overflow-hidden p-2">
       <div class="relative z-10">
-        <h3 class="text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-widest mb-2">Tvůj Rank</h3>
-        <p class="text-3xl font-black dark:text-white text-black italic uppercase">Cooming soon</p>
+        <h3 class="text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-widest mb-2">Wilks score</h3>
+        <p class="text-3xl font-black dark:text-white text-black italic uppercase">{calculateWilksScore(data.userData?.gender ?? 'male', data.userData?.weight ?? 0, totalWilksLift)}</p>
       </div>
       <AwardOutline class="absolute -right-4 -bottom-4 w-24 h-24 dark:text-white/10 text-black/10 rotate-12" />
     </Card>
