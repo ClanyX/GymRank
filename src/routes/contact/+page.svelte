@@ -21,9 +21,11 @@
 		</div>
 
 		<div class="p-6 border rounded-xl hover:shadow-lg transition-shadow bg-white dark:bg-gray-600 cursor-pointer">
-			<div class="text-3xl mb-3">🔥</div>
-			<h3 class="font-bold text-xl mb-2">Metodika Ranku</h3>
-			<p class="text-sm text-gray-400">Zjisti, jak počítáme tvé skóre v porovnání s ostatními.</p>
+			<a href="https://en.wikipedia.org/wiki/Wilks_coefficient" target="_blank">
+				<div class="text-3xl mb-3">🔥</div>
+				<h3 class="font-bold text-xl mb-2">Metodika Ranku</h3>
+				<p class="text-sm text-gray-400">Zjisti, jak počítáme tvé skóre v porovnání s ostatními.</p>
+			</a>
 		</div>
 	</div>
 

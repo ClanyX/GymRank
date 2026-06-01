@@ -51,7 +51,7 @@
                 <p class="text-sm text-zinc-500 dark:text-zinc-400">Pořadí atletů přepočítané relativně k jejich tělesné váze.</p>
             </div>
             <span class="hidden sm:inline-flex items-center text-xs text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded-lg px-2.5 py-1.5 cursor-help" title="Wilks score srovnává výkony napříč váhovými kategoriemi.">
-                Co je Wilks?
+                <a href="https://en.wikipedia.org/wiki/Wilks_coefficient" target="_blank" class="decoration-0 hover:underline cursor-help">Co je Wilks?</a>
             </span>
         </div>
 

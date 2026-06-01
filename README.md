@@ -1,100 +1,56 @@
-# Gym Ranking
+# 🏋️‍♂️ GymRank — Vystup z řady, ovládni gym
 
-**Gym Ranks** je webová aplikace, kde si můžeš zapisovat své **PR (Personal Records / osobní rekordy)** z posilovny a pak je **porovnávat s ostatními**, dělat si **žebříčky**, sledovat progres.
+GymRank není jen další nudný fitness deník na zapisování sérií a opakování. Je to **komunitní a analytická platforma** navržená pro lidi, kteří to se silovým tréninkem myslí vážně. 
 
-Cíl je jednoduchý: mít PRka na jednom místě a udělat z nich něco víc než jen poznámku v mobilu.
-
-## Co aplikace řeší
-- PRka se často ztratí v poznámkách / v hlavě / v tabulkách
-- porovnání s kámoši je opruz a bez jednotného formátu
-- chybí přehled: kdo má jaký bench, dřep, mrtvolu, shyby… a jak to roste v čase
-
-## Funkce (aktuálně / plánovaně)
-- Zápis a správa **PR** (např. bench / dřep / mrtvý tah / další cviky)
-- **Žebříčky** podle cviku / období / skupiny (např. top 10 bench)
-- **Porovnání** uživatelů a jejich výkonů
-- **Grafy**
+Cílem projektu je vnést do lokálních posiloven zdravou kompetitivnost, gamifikaci a spravedlivé porovnávání silových výkonů bez ohledu na to, zda vážíš 70 kg nebo metrák.
 
 ---
 
-## Tech stack
-- **SvelteKit + Vite**
-- **Tailwind CSS** + **Flowbite** (UI komponenty)
-- **Supabase** (auth + klient)
-- **Drizzle ORM** + **PostgreSQL** (datová vrstva)
+## 🎯 Hlavní vize & Proč GymRank vznikl?
+
+Většina fitness aplikací izoluje uživatele do jejich vlastních statistik. GymRank mění pravidla hry:
+* **Spravedlivé srovnání (Pound-for-Pound):** Díky integraci pokročilého **Wilks koeficientu** aplikace dokáže objektivně porovnat sílu lehkých a těžkých atletů. Už žádné debaty o tom, kdo je v gymu reálně nejsilnější.
+* **Komunitní žebříčky:** Motivace roste, když vidíš, jak si stojíš v porovnání s ostatními. GymRank staví žebříčky na reálných maximech (PRs).
+* **Čistý a rychlý zážitek:** Žádný zbytečný balast. Rychlé zapsání výkonu na mobilu přímo mezi sériemi a okamžitá aktualizace tvého ranku.
 
 ---
 
-## Rychlý start
+## 🛠️ Použitý Tech Stack (Moderní & Efektivní)
 
-### Požadavky
-- **Node.js** (doporučeně aktuální LTS)
-- **pnpm** (repo používá `pnpm-lock.yaml`)
+Projekt je postaven na bleeding-edge technologiích s důrazem na rychlost, typovou bezpečnost a skvělé UX:
 
-### Instalace
-```bash
-git clone https://github.com/ClanyX/Gym_Ranking.git
-cd Gym_Ranking
-
-pnpm install
-```
-
-### Spuštění (vývoj)
-```bash
-pnpm dev
-```
-
-### Build a preview
-```bash
-pnpm build
-pnpm preview
-```
+* **Frontend & SSR:** [Svelte 5](https://svelte.dev/) — Využívá nejnovější architekturu **Runes** (`$state`, `$derived`, `$props`) pro bleskurychlou reaktivitu a ultra lehký výsledný bundle.
+* **Framework:** [SvelteKit](https://kit.svelte.dev/) — Zajišťuje robustní Server-Side Rendering (SSR) a optimalizované routování.
+* **Styling:** [Tailwind CSS](https://tailwindcss.com/) — Pro plně responzivní, moderní UI s podporou Dark Mode, optimalizované pro rychlé použití na mobilu v gymu.
+* **Backend & Auth:** [Supabase](https://supabase.com/) — Bezpečné ověřování uživatelů (včetně integrace Captchy a pokročilého ošetření resetů hesel/registrací) a realtime databázové capabilities.
+* **ORM & Databáze:** [Drizzle ORM](https://orm.drizzle.team/) + PostgreSQL — Typově bezpečné dotazování do databáze. Váhy a statistiky jsou ukládány v gramech (pro absolutní přesnost výpočtů bez zaokrouhlovacích chyb floatiů).
+* **Hosting:** [Vercel](https://vercel.com/) — Serverless nasazení s okamžitými builds.
 
 ---
 
-## Skripty
-- `pnpm dev` – vývojový server
-- `pnpm build` – produkční build
-- `pnpm preview` – preview produkčního buildu
-- `pnpm check` / `pnpm check:watch` – Svelte/TS kontrola
-- `pnpm lint` – prettier + eslint
-- `pnpm format` – autoformátování přes prettier
+## 🚀 Technické výzvy, které jsem v projektu vyřešil
+
+GymRank není jen poslepovaný boilerplate. Během vývoje jsem musel vyřešit několik netriviálních inženýrských problémů:
+
+### 1. Matematický engine pro Wilks Score
+Implementace polynomické rovnice 5. stupně přímo v TypeScriptu, která bere v potaz pohlaví a převádí interní gramové hodnoty z PostgreSQL na kilogramové vstupy pro přesné vyhodnocení relativní síly.
+
+### 2. Agregační SQL queries v Drizzle
+Sestavení komplexních databázových dotazů pro generování unikátního žebříčku. Dotaz efektivně filtruje a izoluje pouze absolutní maxima každého uživatele (odstranění duplicit) a řadí celou databázi v reálném čase.
+
+### 3. Neprůstřelné Auth Flow na mobilních zařízeních
+Vyřešení problému s in-app prohlížeči mobilních e-mailových klientů (Gmail/Outlook), které standardně blokují cookies. Auth callback byl navržen tak, aby bezpečně přenášel tokeny přímo v URL a umožnil lidem resetovat heslo na jedno kliknutí přímo z telefonu.
 
 ---
 
-## Proměnné prostředí (Supabase)
-Projekt používá veřejné proměnné:
+## 📈 Plány do budoucna (Roadmap)
 
-- `PUBLIC_SUPABASE_URL`
-- `PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY`
-
-Doporučení: vytvoř `.env` (nebo `.env.local`) a doplň hodnoty ze Supabase projektu.
-
-Příklad:
-```env
-PUBLIC_SUPABASE_URL=...
-PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY=...
-```
+- [ ] **IPF GL Points:** Přidání modernějšího srovnávacího standardu vedle klasického Wilkse.
+- [ ] **Historie progresu:** Interaktivní grafy ukazující vývoj maximálek v čase.
+- [ ] **Verifikace výkonů:** Možnost nahrát video/odkaz na pokus, který následně schválí správce gymu (prevence "fake" výkonů).
+- [ ] **Týmové výzvy:** Možnost zakládat uzavřené miniligy pro party kamarádů.
 
 ---
 
-## Jak to (typicky) funguje
-1. Uživatel se přihlásí.
-2. Přidá si PRko pro konkrétní cvik (váha, datum…).
-3. Appka to uloží a umožní:
-   - zobrazit vlastní historii/progres,
-   - porovnat se s ostatními,
-   - vytvořit žebříčky (např. „Top bench tento měsíc“).
-
----
-
-## Struktura projektu (orientačně)
-- `src/` – zdrojové kódy aplikace
-- `static/` – statické soubory
-- `src/lib/supabase.ts` – Supabase klient pro browser
-- `drizzle.config.ts` – konfigurace Drizzle
-
----
-
-## Licence
-**Apache License 2.0** (viz licence v repozitáři).
+📄 **Autor:** Filip Šandera  
+🌐 **Live projekt:** [www.gymrank.cz](https://www.gymrank.cz)
