@@ -22,7 +22,7 @@ export const GET: RequestHandler = async ({ url, locals: { supabase } }) => {
 				throw redirect(303, `/auth/update-password?code=${token_hash}`);
 			}
 
-			if (meta && meta.firstName) {
+			if (meta) {
 				try {
 					const existing = await db
 						.select()
