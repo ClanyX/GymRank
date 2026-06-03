@@ -14,13 +14,13 @@ export const GET: RequestHandler = async ({ url, locals: { supabase } }) => {
 			type: type as unknown as 'recovery' | 'signup' | 'email',
 		});
 
+		if (type === 'recovery') {
+			throw redirect(303, `/auth/update-password?code=${token_hash}`);
+		}
+
 		if (!error && sessionData?.user) {
 			const user = sessionData.user;
 			const meta = user.user_metadata;
-
-			if (type === 'recovery') {
-				throw redirect(303, `/auth/update-password?code=${token_hash}`);
-			}
 
 			if (meta) {
 				try {
