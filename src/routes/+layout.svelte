@@ -55,7 +55,7 @@
 			<NavBrand href="/"> <!-- h-6 only with alpha/beta text otherwise h-9 (img) -->
 				<img src="/logo.svg" class="me-3 h-6 sm:h-12" alt="gym-logo" />
 				<span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">GymRank</span>
-				<span class="ml-2 mt-3 text-xs font-semibold whitespace-nowrap text-gray-500">ALPHA</span>
+				<span class="ml-2 mt-3 text-xs font-semibold whitespace-nowrap text-gray-500">BETA</span>
 			</NavBrand>
   			<div class="flex md:order-2 gap-1">
 				{#if !session} <!-- TODO: size="xs" only with alpha/beta text otherwise size="sm" -->

@@ -5,22 +5,24 @@ import { userTable } from '$lib/server/database/schema';
 import { eq } from 'drizzle-orm';
 
 export const GET: RequestHandler = async ({ url, locals: { supabase } }) => {
-	const code = url.searchParams.get('code') || url.searchParams.get('token');
 	const type = url.searchParams.get('type');
-	const action = url.searchParams.get('action') || '';
+	const token_hash = url.searchParams.get('token_hash');
 
-	if (code) {
-		const { data: sessionData, error } = await supabase.auth.exchangeCodeForSession(code);
+	if (token_hash && type) {
+		const { data: sessionData, error } = await supabase.auth.verifyOtp({
+			token_hash,
+			type: type as unknown as 'recovery' | 'signup' | 'email',
+		});
 
 		if (!error && sessionData?.user) {
 			const user = sessionData.user;
 			const meta = user.user_metadata;
 
-			if (type === 'recovery' || action === 'reset-password') {
-				throw redirect(303, `/auth/update-password?code=${code}`);
+			if (type === 'recovery') {
+				throw redirect(303, `/auth/update-password?code=${token_hash}`);
 			}
 
-			if (meta && meta.firstName && action === 'register') {
+			if (meta && meta.firstName) {
 				try {
 					const existing = await db
 						.select()
@@ -54,7 +56,7 @@ export const GET: RequestHandler = async ({ url, locals: { supabase } }) => {
 		}
 	}
 
-	if (type === 'recovery' || action === 'reset-password') {
+	if (type === 'recovery') {
 		throw redirect(303, '/auth/reset-password?error=Odkaz_vyprsel_nebo_je_neplatny');
 	}
 

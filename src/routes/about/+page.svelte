@@ -65,6 +65,9 @@
                         </p>
                     </a>
                 </TimelineItem>
+                <TimelineItem title="BETA verze" date="1. Června 2026">
+                    <p class="text-gray-500 text-sm mt-2">Aplikace spuštěna v BETA verzi.</p>
+                </TimelineItem>
             </Timeline>
         </div>
     </section>
