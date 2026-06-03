@@ -1,6 +1,6 @@
 import { db } from '$lib/server/';
 import { recordTable, userTable, exerciseTable } from '$lib/server/database/schema';
-import { eq, sql, desc } from 'drizzle-orm';
+import { eq, sql, asc, desc } from 'drizzle-orm';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ locals }) => {
@@ -35,7 +35,10 @@ export const load: PageServerLoad = async ({ locals }) => {
         .from(bestPerUser)
         .leftJoin(userTable, eq(bestPerUser.userId, userTable.id))
         .leftJoin(exerciseTable, eq(bestPerUser.exerciseId, exerciseTable.id))
-        .orderBy(desc(bestPerUser.maxWeight));
+        .orderBy(
+            desc(bestPerUser.maxWeight),
+            asc(sql`rank`),
+        );
 
 
     return {
